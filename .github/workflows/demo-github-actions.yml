@@ -11,9 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Run a script in Job One
-        run: echo "This is Job One"
+      - run: echo "Running Job One"
 
   job_two:
     name: 🚀 Job Two
@@ -21,6 +19,4 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Run a script in Job Two
-        run: echo "This is Job Two"
+      - run: echo "Running Job Two"
