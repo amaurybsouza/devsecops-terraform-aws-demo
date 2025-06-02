@@ -20,3 +20,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - run: echo "Running Job Two"
+    needs: job_one
