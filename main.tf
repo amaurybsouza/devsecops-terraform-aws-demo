@@ -1,15 +1,15 @@
 terraform {
   required_providers {
-    aws = { 
-      source = "hashicorp/aws"
+    aws = {
+      source  = "hashicorp/aws"
       version = "6.0.0-beta2"
-    }   
+    }
   }
 }
 
 provider "aws" {
   # Configuration options
-  region = "sa-east-1"
+  region                   = "sa-east-1"
   shared_credentials_files = ["/home/amaurybs/.aws/credentials"]
   profile                  = "default"
 }
@@ -33,9 +33,9 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
-  monitoring = true
+  monitoring    = true
 
-  tags = { 
+  tags = {
     Name = "HelloWorld"
   }
 }
