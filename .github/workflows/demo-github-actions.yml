@@ -1,0 +1,26 @@
+name: Two Jobs Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  job_one:
+    name: 🔧 Job One
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run a script in Job One
+        run: echo "This is Job One"
+
+  job_two:
+    name: 🚀 Job Two
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run a script in Job Two
+        run: echo "This is Job Two"
