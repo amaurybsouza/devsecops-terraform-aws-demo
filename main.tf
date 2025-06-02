@@ -1,17 +1,40 @@
-#Terraform configuration
+terraform {
+  required_providers {
+    aws = { 
+      source = "hashicorp/aws"
+      version = "6.0.0-beta2"
+    }   
+  }
+}
+
 provider "aws" {
-  region = "us-east-1"
+  # Configuration options
+  region = "sa-east-1"
+  shared_credentials_files = ["/home/amaurybs/.aws/credentials"]
+  profile                  = "default"
 }
 
-resource "aws_s3_bucket" "secure_bucket" {
-  bucket = "my-secure-devsecops-bucket1"
-  force_destroy = true
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
 }
 
-resource "aws_s3_bucket_public_access_block" "block" {
-  bucket = aws_s3_bucket.secure_bucket.id
-  block_public_acls   = true
-  block_public_policy = true
-  restrict_public_buckets = true
-  ignore_public_acls  = true
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+
+  tags = { 
+    Name = "HelloWorld"
+  }
 }
