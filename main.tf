@@ -12,7 +12,7 @@ provider "aws" {
   # Configuration options
   region                   = "sa-east-1"
   shared_credentials_files = ["/home/amaurybs/.aws/credentials"]
-  profile                  = "default"
+  #profile                  = "default"
 }
 
 data "aws_ami" "ubuntu" {
