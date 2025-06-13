@@ -51,9 +51,25 @@ jobs:
         id: init
         run: terraform init
       
+  terraform-validate:
+    name: "Terraform Validate"
+    runs-on: ubuntu-latest
+    needs: checkov  # Optional: make it run after Checkov scan
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
+
 
   tflint:
     name: "TFLint Scanning"
