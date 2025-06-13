@@ -140,7 +140,7 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: results.sarif
-    needs: [tflint, terraform]
+    needs: [tflint]
 
   plan:
     name: "Terraform Plan"
