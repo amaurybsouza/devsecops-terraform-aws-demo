@@ -104,7 +104,7 @@ jobs:
 
     - name: Run TFLint
       run: tflint -f compact
-    needs: terraform
+    needs: terraform-validate
 
   # This workflow contains a single job called "checkov"
   checkov:
